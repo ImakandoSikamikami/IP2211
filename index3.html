@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Good Morning, My Love</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#2E1A3D;
+    --dusk:#6B3654;
+    --dawn:#C7566E;
+    --sunrise:#F3A768;
+    --gold:#F0C05A;
+    --cream:#FFF8F0;
+    --ink:#3A2130;
+    --ink-soft:#7A5A68;
+    --font-display:'Fraunces', serif;
+    --font-body:'Nunito', sans-serif;
+    --font-hand:'Caveat', cursive;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--font-body);
+    color:var(--ink);
+    background:var(--cream);
+    overflow-x:hidden;
+    transition:background 1.4s ease;
+  }
+  body.risen{ background:#FFF3E4; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+    background:linear-gradient(180deg, var(--night) 0%, var(--dusk) 45%, var(--dawn) 75%, var(--sunrise) 100%);
+    padding:2rem 1.5rem;
+    transition:filter 1.6s ease;
+  }
+  .stars{
+    position:absolute; inset:0; top:0; height:55%;
+    pointer-events:none;
+  }
+  .star{
+    position:absolute; width:2px; height:2px; background:#fff; border-radius:50%;
+    opacity:.7; animation:twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle{ 0%,100%{opacity:.15;} 50%{opacity:.9;} }
+
+  .sun{
+    position:absolute;
+    width:150px; height:150px;
+    left:50%; transform:translateX(-50%);
+    bottom:-90px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #FFE7B0, var(--gold) 55%, var(--sunrise) 100%);
+    box-shadow:0 0 70px 25px rgba(240,192,90,.35);
+    transition:bottom 2.6s cubic-bezier(.22,1,.36,1), box-shadow 2.6s ease, width 2.6s ease, height 2.6s ease;
+  }
+  .hero.risen-sun .sun{
+    bottom:38%;
+    width:220px; height:220px;
+    box-shadow:0 0 140px 60px rgba(240,192,90,.55);
+  }
+
+  .hero-content{ position:relative; z-index:2; max-width:640px; }
+  .eyebrow{
+    font-family:var(--font-hand);
+    font-size:1.4rem;
+    color:#FFE3D6;
+    letter-spacing:.02em;
+    margin-bottom:.4rem;
+    opacity:.9;
+  }
+  .hero h1{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-weight:500;
+    color:#fff;
+    font-size:clamp(2.3rem, 6vw, 4rem);
+    line-height:1.08;
+    text-shadow:0 2px 30px rgba(0,0,0,.25);
+  }
+  .hero p{
+    font-family:var(--font-body);
+    color:#FFE9DA;
+    font-size:clamp(1rem,2.2vw,1.15rem);
+    margin-top:1.1rem;
+    line-height:1.6;
+  }
+  .scroll-cue{
+    margin-top:3rem;
+    color:#FFE9DA;
+    font-size:.85rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    opacity:.75;
+    animation:bob 2.2s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
+
+  /* ---------- SECTIONS ---------- */
+  section{
+    padding:5rem 1.5rem;
+    display:flex; justify-content:center;
+  }
+  .wrap{ width:100%; max-width:680px; }
+
+  .kicker{
+    font-family:var(--font-hand);
+    font-size:1.3rem;
+    color:var(--dawn);
+    margin-bottom:.3rem;
+  }
+  h2{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(1.7rem,4vw,2.3rem);
+    color:var(--ink);
+    margin-bottom:1.5rem;
+  }
+
+  /* letter section */
+  .letter{
+    background:#fff;
+    border-left:4px solid var(--dawn);
+    border-radius:4px 14px 14px 4px;
+    padding:2.2rem 2rem;
+    box-shadow:0 20px 50px -25px rgba(58,33,48,.25);
+  }
+  .letter p{
+    font-family:var(--font-display);
+    font-size:1.08rem;
+    line-height:1.85;
+    color:var(--ink);
+    margin-bottom:1.1rem;
+  }
+  .letter p:last-child{margin-bottom:0;}
+  .sign{
+    font-family:var(--font-hand);
+    font-size:1.6rem;
+    color:var(--dawn);
+    margin-top:1.4rem;
+    display:block;
+  }
+
+  /* pride / accountability columns */
+  .pair{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.2rem;
+  }
+  @media(max-width:640px){ .pair{grid-template-columns:1fr;} }
+  .col{
+    background:#fff;
+    border-radius:16px;
+    padding:1.6rem 1.5rem;
+    box-shadow:0 14px 34px -22px rgba(58,33,48,.3);
+  }
+  .col h3{
+    font-family:var(--font-body);
+    font-weight:800;
+    font-size:.95rem;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    color:var(--dawn);
+    margin-bottom:.9rem;
+  }
+  .col ul{ list-style:none; }
+  .col li{
+    font-size:.95rem;
+    line-height:1.55;
+    color:var(--ink-soft);
+    padding-left:1.2rem;
+    position:relative;
+    margin-bottom:.75rem;
+  }
+  .col li::before{
+    content:"♡";
+    position:absolute; left:0; top:0;
+    color:var(--gold);
+  }
+
+  /* nickname cards */
+  .names{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1rem;
+  }
+  @media(max-width:640px){ .names{grid-template-columns:1fr;} }
+  .name-card{
+    background:linear-gradient(160deg,#fff, #FFF1E6);
+    border-radius:16px;
+    padding:1.5rem 1.2rem;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 14px 30px -20px rgba(58,33,48,.3);
+    transition:transform .25s ease, box-shadow .25s ease;
+    position:relative;
+    min-height:130px;
+  }
+  .name-card:hover{ transform:translateY(-5px); box-shadow:0 20px 40px -18px rgba(58,33,48,.35); }
+  .name-card .word{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1.4rem;
+    color:var(--dawn);
+  }
+  .name-card .note{
+    font-size:.85rem;
+    color:var(--ink-soft);
+    margin-top:.6rem;
+    line-height:1.4;
+    opacity:0;
+    max-height:0;
+    overflow:hidden;
+    transition:opacity .3s ease, max-height .3s ease, margin-top .3s ease;
+  }
+  .name-card:hover .note, .name-card.tapped .note{
+    opacity:1; max-height:80px; margin-top:.6rem;
+  }
+
+  /* CTA */
+  .cta-section{ text-align:center; }
+  .cta-box{
+    background:linear-gradient(160deg,#fff,#FFF3E4);
+    border-radius:22px;
+    padding:3rem 2rem;
+    box-shadow:0 24px 60px -28px rgba(58,33,48,.35);
+  }
+  .cta-box h2{ margin-bottom:.6rem; }
+  .cta-box p{ color:var(--ink-soft); margin-bottom:2rem; line-height:1.6; }
+  .btn{
+    font-family:var(--font-body);
+    font-weight:800;
+    font-size:1rem;
+    color:#fff;
+    background:linear-gradient(120deg,var(--dawn),var(--sunrise));
+    border:none;
+    padding:1rem 2.2rem;
+    border-radius:50px;
+    cursor:pointer;
+    box-shadow:0 12px 26px -10px rgba(199,86,110,.55);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn:hover{ transform:translateY(-2px) scale(1.02); box-shadow:0 16px 32px -10px rgba(199,86,110,.65); }
+  .btn:active{ transform:translateY(0) scale(.98); }
+
+  .reveal{
+    margin-top:2.2rem;
+    display:none;
+  }
+  .reveal.show{ display:block; animation:fadeUp .6s ease both; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+  .reveal h3{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1.5rem;
+    color:var(--dawn);
+    margin-bottom:.8rem;
+  }
+  .reveal p{ color:var(--ink-soft); line-height:1.6; margin-bottom:1.3rem; }
+
+  textarea{
+    width:100%;
+    font-family:var(--font-body);
+    font-size:.95rem;
+    border:1.5px solid #F0DACB;
+    border-radius:12px;
+    padding:.9rem 1rem;
+    resize:vertical;
+    min-height:80px;
+    color:var(--ink);
+    background:#fffaf5;
+  }
+  textarea:focus{ outline:2px solid var(--gold); outline-offset:2px; }
+  .save-btn{
+    margin-top:.8rem;
+    font-family:var(--font-body);
+    font-weight:700;
+    font-size:.9rem;
+    color:var(--dawn);
+    background:#fff;
+    border:1.5px solid var(--dawn);
+    padding:.65rem 1.4rem;
+    border-radius:50px;
+    cursor:pointer;
+    transition:background .2s ease, color .2s ease;
+  }
+  .save-btn:hover{ background:var(--dawn); color:#fff; }
+
+  .her-note{
+    margin-top:1.4rem;
+    background:#fff;
+    border-radius:12px;
+    padding:1.1rem 1.2rem;
+    border-left:3px solid var(--gold);
+    font-family:var(--font-display);
+    font-style:italic;
+    color:var(--ink);
+    display:none;
+    text-align:left;
+  }
+  .her-note.show{ display:block; }
+
+  footer{
+    text-align:center;
+    padding:3rem 1.5rem 4rem;
+    font-family:var(--font-hand);
+    font-size:1.2rem;
+    color:var(--ink-soft);
+  }
+
+  .hearts-layer{
+    position:fixed; inset:0; pointer-events:none; z-index:50; overflow:hidden;
+  }
+  .heart{
+    position:absolute;
+    bottom:-40px;
+    font-size:1.4rem;
+    color:var(--dawn);
+    opacity:.9;
+    animation:float-up 4.5s ease-in forwards;
+  }
+  @keyframes float-up{
+    0%{ transform:translateY(0) rotate(0deg); opacity:.9; }
+    100%{ transform:translateY(-110vh) rotate(25deg); opacity:0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero" id="hero">
+  <div class="stars" id="stars"></div>
+  <div class="sun"></div>
+  <div class="hero-content">
+    <div class="eyebrow">for Priscilla</div>
+    <h1>Good evening, my love.</h1>
+    <p>I know these past two days haven't felt like us. Before anything else &mdash; I'm sorry. Let me try this again, properly.</p>
+  </div>
+  <div class="scroll-cue">scroll down ↓</div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">the honest part</div>
+    <h2>What actually happened</h2>
+    <div class="letter">
+      <p>This has been building for two days now. Last night we thought we'd fixed it. Then this morning, your greeting didn't feel like a normal morning to me &mdash; and when you said it was, I took that as you brushing past something real. So I pulled back too. I stopped calling you babe, my love, mama &mdash; the things I say without even thinking &mdash; and that silence just let the tension grow all day until it broke in the evening.</p>
+      <p>We both had a hand in this. We both had too much pride to be the first to really own our part, and that's on both of us, not just one.</p>
+      <p>I miss you. I miss us. I don't want to fight like this again.</p>
+      <span class="sign">&mdash; Imakando</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">the part I need you to hear</div>
+    <h2>Not about who you are</h2>
+    <div class="pair">
+      <div class="col">
+        <h3>What I'm owning</h3>
+        <ul>
+          <li>I let the tension sit instead of just asking what was really going on with you.</li>
+          <li>I went quiet with the names I usually call you instead of talking to you.</li>
+          <li>I let my hurt turn into distance instead of a conversation.</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>What I need you to know</h3>
+        <ul>
+          <li>When I bring up accountability, it's about the moment &mdash; never about your character.</li>
+          <li>I don't see you in some certain way. I'm not trying to make you the villain here.</li>
+          <li>I'm not questioning you. I'm just trying to get us back to normal.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="text-align:center;">
+    <div class="kicker">the words I owe you back</div>
+    <h2>Things I've been holding in</h2>
+    <div class="names">
+      <div class="name-card" tabindex="0">
+        <div class="word">Babe</div>
+        <div class="note">The word that starts most of my texts to you. It felt wrong not saying it these past two days.</div>
+      </div>
+      <div class="name-card" tabindex="0">
+        <div class="word">My Love</div>
+        <div class="note">What I say when everything else feels too loud, and I just want you close.</div>
+      </div>
+      <div class="name-card" tabindex="0">
+        <div class="word">Mama</div>
+        <div class="note">The silly one that always gets a laugh out of you, even when you try to hide it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2>Can tonight be the reset?</h2>
+      <p>No more pride, no more silence. Just us, back to normal.</p>
+      <button class="btn" id="forgiveBtn">Let's begin again ☀️</button>
+
+      <div class="reveal" id="revealBox">
+        <h3>Good evening, my love. I mean it this time.</h3>
+        <p>Thank you. I don't take this lightly. I love you &mdash; babe, my love, mama &mdash; all of it, all of you. Here's to waking up on the same side tomorrow.</p>
+        <textarea id="herNote" placeholder="Write something back to me, if you want to. I'll get it."></textarea>
+        <br>
+        <button class="save-btn" id="saveNote">Send this to me</button>
+        <div class="her-note" id="herNoteDisplay"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>with all of me, always &mdash; Imakando</footer>
+
+<div class="hearts-layer" id="heartsLayer"></div>
+
+<script>
+  // scatter stars
+  const starsEl = document.getElementById('stars');
+  for(let i=0;i<40;i++){
+    const s = document.createElement('div');
+    s.className='star';
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*100+'%';
+    s.style.animationDelay = (Math.random()*3)+'s';
+    starsEl.appendChild(s);
+  }
+
+  // rise the sun shortly after load
+  const hero = document.getElementById('hero');
+  setTimeout(()=> hero.classList.add('risen-sun'), 500);
+
+  // forgive interaction
+  const forgiveBtn = document.getElementById('forgiveBtn');
+  const revealBox = document.getElementById('revealBox');
+  const heartsLayer = document.getElementById('heartsLayer');
+
+  function spawnHearts(){
+    const symbols = ['♡','❤','✿'];
+    for(let i=0;i<24;i++){
+      const h = document.createElement('div');
+      h.className='heart';
+      h.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+      h.style.left = Math.random()*100+'%';
+      h.style.animationDelay = (Math.random()*1.2)+'s';
+      h.style.fontSize = (1 + Math.random()*1.2)+'rem';
+      heartsLayer.appendChild(h);
+      setTimeout(()=> h.remove(), 6000);
+    }
+  }
+
+  forgiveBtn.addEventListener('click', () => {
+    document.body.classList.add('risen');
+    revealBox.classList.add('show');
+    spawnHearts();
+    forgiveBtn.disabled = true;
+    forgiveBtn.style.opacity = '.6';
+    forgiveBtn.style.cursor = 'default';
+    revealBox.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  // her note — sent to Imakando via Formspree
+  const saveNote = document.getElementById('saveNote');
+  const herNote = document.getElementById('herNote');
+  const herNoteDisplay = document.getElementById('herNoteDisplay');
+  const FORMSPREE_URL = 'https://formspree.io/f/mgojryvv';
+
+  saveNote.addEventListener('click', async () => {
+    const text = herNote.value.trim();
+    if(!text) return;
+
+    saveNote.disabled = true;
+    saveNote.textContent = 'Sending...';
+
+    herNoteDisplay.textContent = '"' + text + '"';
+    herNoteDisplay.classList.add('show');
+    spawnHearts();
+
+    try{
+      await fetch(FORMSPREE_URL, {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+        body: JSON.stringify({ message: text, from: 'Priscilla', page: 'Good evening, my love' })
+      });
+      saveNote.textContent = 'Sent to Imakando 💌';
+    }catch(err){
+      saveNote.textContent = 'Saved here (send failed, try again)';
+      saveNote.disabled = false;
+    }
+  });
+
+  // tap-to-reveal for touch devices on nickname cards
+  document.querySelectorAll('.name-card').forEach(card => {
+    card.addEventListener('click', () => card.classList.toggle('tapped'));
+  });
+</script>
+
+</body>
+</html>
